@@ -8,13 +8,19 @@ transform = transforms.Compose([
 
 class TheDataset:
     def __init__(self, path):
-        self.data = datasets.ImageFolder(path, transform=transform)
+        self.dataset = datasets.ImageFolder(path, transform=transform)
+
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, idx):
+        return self.dataset[idx]
 
     def get_data(self):
-        return self.data
+        return self.dataset
 
     def get_classes(self):
-        return self.data.classes
+        return self.dataset.classes
 
 
 def the_dataloader(dataset, batch_size=4):
